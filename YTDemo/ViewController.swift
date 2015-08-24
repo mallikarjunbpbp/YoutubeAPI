@@ -9,9 +9,12 @@
 import UIKit
 
 var apiKey = "AIzaSyBb_PKwBf2rd7GojMb7dSh5snCqyLGAVmc"
-var desiredChannelArray = ["Apple", "Google", "Microsoft"]
+var desiredChannelArray = ["ASU", "ASUAthletics", "ASUPitchforks","librarychannel","asucomedy"]
 var channelIndex = 0
 var channelsDataArray:Array<Dictionary<NSObject, AnyObject>>=[]
+var videosArray: Array<Dictionary<NSObject, AnyObject>> = []
+var selectedVideoIndex: Int!
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
@@ -44,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: IBAction method implementation
     
     @IBAction func changeContent(sender: AnyObject) {
-        
+           tblVideos.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     
@@ -60,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return channelsDataArray.count
         }
         else {
-            
+             return videosArray.count
         }
         return 0
     }
@@ -85,11 +88,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else {
             cell = tableView.dequeueReusableCellWithIdentifier("idCellVideo", forIndexPath: indexPath) as! UITableViewCell
+            
+            let videoTitle = cell.viewWithTag(10) as! UILabel
+            let videoThumbnail = cell.viewWithTag(11) as! UIImageView
+            
+            let videoDetails = videosArray[indexPath.row]
+            videoTitle.text = videoDetails["title"] as? String
+            videoThumbnail.image = UIImage(data: NSData(contentsOfURL: NSURL(string: (videoDetails["thumbnail"] as? String)!)!)!)
         }
 
         return cell
     }
-    
+
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 140.0
@@ -173,5 +183,83 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     })
 
     }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if segDisplayedContent.selectedSegmentIndex == 0 {
+            // In this case the channels are the displayed content.
+            // The videos of the selected channel should be fetched and displayed.
+            
+            // Switch the segmented control to "Videos".
+            segDisplayedContent.selectedSegmentIndex = 1
+            
+            // Show the activity indicator.
+            viewWait.hidden = false
+            
+            // Remove all existing video details from the videosArray array.
+            videosArray.removeAll(keepCapacity: false)
+            
+            // Fetch the video details for the tapped channel.
+            getVideosForChannelAtIndex(indexPath.row)
+        }
+        else {
+            selectedVideoIndex = indexPath.row
+            performSegueWithIdentifier("idSeguePlayer", sender: self)
+        }
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "idSeguePlayer" {
+            let playerViewController = segue.destinationViewController as! PlayerViewController
+            playerViewController.videoID = videosArray[selectedVideoIndex]["videoID"] as! String
+        }
+    }
+    func getVideosForChannelAtIndex(index: Int!) {
+        // Get the selected channel's playlistID value from the channelsDataArray array and use it for fetching the proper video playlst.
+        let playlistID = channelsDataArray[index]["playlistID"] as! String
+        
+        // Form the request URL string.
+        let urlString = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=\(playlistID)&key=\(apiKey)"
+        
+        // Create a NSURL object based on the above string.
+        let targetURL = NSURL(string: urlString)
+        
+        // Fetch the playlist from Google.
+        performGetRequest(targetURL, completion: { (data, HTTPStatusCode, error) -> Void in
+            if HTTPStatusCode == 200 && error == nil {
+                // Convert the JSON data into a dictionary.
+                let resultsDict = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! Dictionary<NSObject, AnyObject>
+                
+                // Get all playlist items ("items" array).
+                let items: Array<Dictionary<NSObject, AnyObject>> = resultsDict["items"] as! Array<Dictionary<NSObject, AnyObject>>
+                
+                // Use a loop to go through all video items.
+                for var i=0; i<items.count; ++i {
+                    let playlistSnippetDict = (items[i] as Dictionary<NSObject, AnyObject>)["snippet"] as! Dictionary<NSObject, AnyObject>
+                    
+                    // Initialize a new dictionary and store the data of interest.
+                    var desiredPlaylistItemDataDict = Dictionary<NSObject, AnyObject>()
+                    
+                    desiredPlaylistItemDataDict["title"] = playlistSnippetDict["title"]
+                    desiredPlaylistItemDataDict["thumbnail"] = ((playlistSnippetDict["thumbnails"] as! Dictionary<NSObject, AnyObject>)["default"] as! Dictionary<NSObject, AnyObject>)["url"]
+                    desiredPlaylistItemDataDict["videoID"] = (playlistSnippetDict["resourceId"] as! Dictionary<NSObject, AnyObject>)["videoId"]
+                    
+                    // Append the desiredPlaylistItemDataDict dictionary to the videos array.
+                    videosArray.append(desiredPlaylistItemDataDict)
+                    
+                    // Reload the tableview.
+                    self.tblVideos.reloadData()
+                }
+            }
+            else {
+                println("HTTP Status Code = \(HTTPStatusCode)")
+                println("Error while loading channel videos: \(error)")
+            }
+            
+            // Hide the activity indicator.
+            self.viewWait.hidden = true
+        })
+        
+        
+    }
+    
+    
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iAm-kE-lfw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iAm-kE-lfw">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -57,9 +57,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbn-Ke-35b">
-                                                    <rect key="frame" x="141" y="25" width="451" height="23"/>
+                                                    <rect key="frame" x="141" y="8" width="451" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="23" id="cog-C4-Nc7"/>
+                                                        <constraint firstAttribute="height" constant="40" id="cog-C4-Nc7"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,7 +78,7 @@
                                                 <constraint firstItem="Kwc-RK-DEq" firstAttribute="top" secondItem="bbn-Ke-35b" secondAttribute="bottom" constant="8" symbolic="YES" id="DYZ-cb-SYT"/>
                                                 <constraint firstItem="Kwc-RK-DEq" firstAttribute="bottom" secondItem="rnU-D8-keP" secondAttribute="bottom" id="JMP-X5-MOq"/>
                                                 <constraint firstItem="Kwc-RK-DEq" firstAttribute="trailing" secondItem="bbn-Ke-35b" secondAttribute="trailing" id="QrC-lY-hJr"/>
-                                                <constraint firstItem="bbn-Ke-35b" firstAttribute="top" secondItem="rnU-D8-keP" secondAttribute="top" constant="15" id="RDu-1U-NnE"/>
+                                                <constraint firstItem="bbn-Ke-35b" firstAttribute="top" secondItem="rnU-D8-keP" secondAttribute="top" constant="-2" id="RDu-1U-NnE"/>
                                                 <constraint firstItem="rnU-D8-keP" firstAttribute="top" secondItem="vmI-n8-SDy" secondAttribute="topMargin" constant="2" id="Wz5-bf-ScG"/>
                                                 <constraint firstItem="bbn-Ke-35b" firstAttribute="leading" secondItem="rnU-D8-keP" secondAttribute="trailing" constant="13" id="dWi-bX-S6t"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="rnU-D8-keP" secondAttribute="bottom" constant="1" id="jUK-BP-Nn0"/>
