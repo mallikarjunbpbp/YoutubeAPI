@@ -13,6 +13,9 @@
 		C0C1EDF51B3E8D9C00E70ABF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0C1EDF41B3E8D9C00E70ABF /* Images.xcassets */; };
 		C0C1EDF81B3E8D9C00E70ABF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C1EDF61B3E8D9C00E70ABF /* LaunchScreen.xib */; };
 		C0C1EE041B3E8D9C00E70ABF /* YTDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1EE031B3E8D9C00E70ABF /* YTDemoTests.swift */; };
+		C0C1EE0E1B3E8EB900E70ABF /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1EE0D1B3E8EB900E70ABF /* PlayerViewController.swift */; };
+		C0C1EE131B3E909000E70ABF /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = C0C1EE121B3E909000E70ABF /* Assets */; };
+		C0DA29B11B3EBF1B00CB71CC /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA29B01B3EBF1B00CB71CC /* YTPlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,11 @@
 		C0C1EDFD1B3E8D9C00E70ABF /* YTDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YTDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C1EE021B3E8D9C00E70ABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0C1EE031B3E8D9C00E70ABF /* YTDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTDemoTests.swift; sourceTree = "<group>"; };
+		C0C1EE0D1B3E8EB900E70ABF /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		C0C1EE0F1B3E907600E70ABF /* YTDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YTDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		C0C1EE121B3E909000E70ABF /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
+		C0DA29AF1B3EBF1500CB71CC /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
+		C0DA29B01B3EBF1B00CB71CC /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,9 @@
 				C0C1EDEA1B3E8D9C00E70ABF /* YTDemo */,
 				C0C1EE001B3E8D9C00E70ABF /* YTDemoTests */,
 				C0C1EDE91B3E8D9C00E70ABF /* Products */,
+				C0C1EE121B3E909000E70ABF /* Assets */,
+				C0DA29AF1B3EBF1500CB71CC /* YTPlayerView.h */,
+				C0DA29B01B3EBF1B00CB71CC /* YTPlayerView.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,10 +90,12 @@
 			children = (
 				C0C1EDED1B3E8D9C00E70ABF /* AppDelegate.swift */,
 				C0C1EDEF1B3E8D9C00E70ABF /* ViewController.swift */,
+				C0C1EE0D1B3E8EB900E70ABF /* PlayerViewController.swift */,
 				C0C1EDF11B3E8D9C00E70ABF /* Main.storyboard */,
 				C0C1EDF41B3E8D9C00E70ABF /* Images.xcassets */,
 				C0C1EDF61B3E8D9C00E70ABF /* LaunchScreen.xib */,
 				C0C1EDEB1B3E8D9C00E70ABF /* Supporting Files */,
+				C0C1EE0F1B3E907600E70ABF /* YTDemo-Bridging-Header.h */,
 			);
 			path = YTDemo;
 			sourceTree = "<group>";
@@ -193,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0C1EDF31B3E8D9C00E70ABF /* Main.storyboard in Resources */,
+				C0C1EE131B3E909000E70ABF /* Assets in Resources */,
 				C0C1EDF81B3E8D9C00E70ABF /* LaunchScreen.xib in Resources */,
 				C0C1EDF51B3E8D9C00E70ABF /* Images.xcassets in Resources */,
 			);
@@ -214,6 +228,8 @@
 			files = (
 				C0C1EDF01B3E8D9C00E70ABF /* ViewController.swift in Sources */,
 				C0C1EDEE1B3E8D9C00E70ABF /* AppDelegate.swift in Sources */,
+				C0DA29B11B3EBF1B00CB71CC /* YTPlayerView.m in Sources */,
+				C0C1EE0E1B3E8EB900E70ABF /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,9 +356,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YTDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YTDemo/YTDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -350,9 +369,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = YTDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YTDemo/YTDemo-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -409,6 +430,7 @@
 				C0C1EE091B3E8D9C00E70ABF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C0C1EE0A1B3E8D9C00E70ABF /* Build configuration list for PBXNativeTarget "YTDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +439,7 @@
 				C0C1EE0C1B3E8D9C00E70ABF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

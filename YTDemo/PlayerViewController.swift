@@ -10,6 +10,8 @@ import UIKit
 
 class PlayerViewController: UIViewController {
 
+    @IBOutlet weak var playerView: YTPlayerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
